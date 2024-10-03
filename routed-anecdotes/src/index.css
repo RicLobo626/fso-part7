@@ -1,0 +1,27 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+#root {
+  margin: 0;
+  height: inherit;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px;
+}
