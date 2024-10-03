@@ -7,6 +7,8 @@ const Menu = () => {
 
   return (
     <header>
+      <h1>Software anecdotes</h1>
+
       <nav>
         <Link to="/" style={padding}>
           anecdotes
