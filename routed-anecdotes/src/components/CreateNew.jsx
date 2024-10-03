@@ -16,7 +16,7 @@ const CreateNew = (props) => {
   };
 
   return (
-    <div>
+    <>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -45,7 +45,7 @@ const CreateNew = (props) => {
         </div>
         <button>create</button>
       </form>
-    </div>
+    </>
   );
 };
 
