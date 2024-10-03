@@ -1,13 +1,26 @@
+import { useField } from "../hooks";
+
 const CreateNew = ({ onCreate }) => {
+  const content = useField();
+  const author = useField();
+  const info = useField();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
 
-    const values = Object.fromEntries(formData.entries());
+    const values = {
+      content: content.attrs.value,
+      author: author.attrs.value,
+      info: info.attrs.value,
+    };
 
-    onCreate({ ...values, votes: 0 });
+    onCreate(values);
+  };
 
-    e.target.reset();
+  const handleReset = () => {
+    content.reset();
+    author.reset();
+    info.reset();
   };
 
   return (
@@ -16,17 +29,23 @@ const CreateNew = ({ onCreate }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="content">content</label>
-          <input id="content" name="content" />
+          <input id="content" {...content.attrs} />
         </div>
+
         <div>
           <label htmlFor="author">author</label>
-          <input id="author" name="author" />
+          <input id="author" {...author.attrs} />
         </div>
+
         <div>
           <label htmlFor="info">url for more info</label>
-          <input id="info" name="info" />
+          <input id="info" {...info.attrs} />
         </div>
+
         <button>create</button>
+        <button onClick={handleReset} type="button">
+          reset
+        </button>
       </form>
     </>
   );
