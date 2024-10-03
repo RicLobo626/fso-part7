@@ -1,18 +1,13 @@
-import { useState } from "react";
-
-const CreateNew = (props) => {
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
-
+const CreateNew = ({ onCreate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addNew({
-      content,
-      author,
-      info,
-      votes: 0,
-    });
+    const formData = new FormData(e.target);
+
+    const values = Object.fromEntries(formData.entries());
+
+    onCreate({ ...values, votes: 0 });
+
+    e.target.reset();
   };
 
   return (
@@ -20,28 +15,16 @@ const CreateNew = (props) => {
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          content
-          <input
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <label htmlFor="content">content</label>
+          <input id="content" name="content" />
         </div>
         <div>
-          author
-          <input
-            name="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <label htmlFor="author">author</label>
+          <input id="author" name="author" />
         </div>
         <div>
-          url for more info
-          <input
-            name="info"
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <label htmlFor="info">url for more info</label>
+          <input id="info" name="info" />
         </div>
         <button>create</button>
       </form>
