@@ -9,11 +9,26 @@ const App = () => {
   const [persons, personService] = useResource("http://localhost:3005/persons");
 
   const handleNoteSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      await noteService.create({ content: content.value });
+      resetContent();
+      console.log("note created successfully");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handlePersonSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      await personService.create({ name: name.value, number: number.value });
+      resetName();
+      resetNumber();
+      console.log("person created successfully");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
