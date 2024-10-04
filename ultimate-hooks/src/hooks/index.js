@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export const useField = (type = "text") => {
@@ -20,9 +21,22 @@ export const useField = (type = "text") => {
 export const useResource = (baseUrl) => {
   const [resources, setResources] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getAndSetResources = async () => {
+      const { data } = await axios.get(baseUrl);
+      setResources(data);
+    };
 
-  const create = async (body) => {};
+    getAndSetResources();
+  }, []);
+
+  const create = async (body) => {
+    const { data } = await axios.post(baseUrl, body);
+
+    setResources(resources.concat(data));
+
+    return data;
+  };
 
   const service = {
     create,
