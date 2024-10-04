@@ -4,15 +4,15 @@ import { useCountry } from "./hooks";
 import { useState } from "react";
 
 const App = () => {
-  const [name, setName] = useState("text");
-  const country = useCountry(name);
+  const [name, setName] = useState("");
+  const { country, isLoading } = useCountry(name);
 
   const handleSearch = (name) => setName(name);
 
   return (
     <main>
-      <Search onSearch={handleSearch} name={name} />
-      <Country country={country} />
+      <Search onSearch={handleSearch} name={name} s />
+      <Country country={country} isLoading={isLoading} />
     </main>
   );
 };
